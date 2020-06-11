@@ -14,7 +14,7 @@ module Gist
     	RestClient::Request.execute(
 			  method: method,
 			  url: "#{API_URL}/#{endpoint}",
-			  payload: payload,
+			  payload: payload.to_json,
 			  headers: {
 			  	content_type: 'application/json',
 			  	Authorization: "Bearer #{@access_token}",
@@ -43,7 +43,7 @@ module Gist
 	      },
 	      body: body
     	}
-    	connect(payload: payload.to_json, method: :post, endpoint: "conversations")
+    	connect(payload: payload, method: :post, endpoint: "conversations")
     end
 
     def get_conversation(id:)
@@ -59,7 +59,7 @@ module Gist
     		teammate_id: teammate_id,
     		assignee_id: assignee_id
     	}
-    	connect(payload: payload.to_json, method: :patch, endpoint: "conversations/#{id}/assign")
+    	connect(payload: payload, method: :patch, endpoint: "conversations/#{id}/assign")
     end
 
     def snooze_conversation(snooze_until: nil, teammate_id:, id:)
@@ -68,7 +68,7 @@ module Gist
     		state: "snoozed",
     		snooze_until: snooze_until
     	}
-    	connect(payload: payload.to_json, method: :patch, endpoint: "conversations/#{id}")
+    	connect(payload: payload, method: :patch, endpoint: "conversations/#{id}")
     end
 
     def reopen_conversation(teammate_id:, id:)
@@ -76,7 +76,7 @@ module Gist
     		teammate_id: teammate_id,
     		state: "open"
     	}
-    	connect(payload: payload.to_json, method: :patch, endpoint: "conversations/#{id}")
+    	connect(payload: payload, method: :patch, endpoint: "conversations/#{id}")
     end
 
     def close_conversation(teammate_id:, id:)
@@ -84,7 +84,7 @@ module Gist
     		teammate_id: teammate_id,
     		state: "closed"
     	}
-    	connect(payload: payload.to_json, method: :patch, endpoint: "conversations/#{id}")
+    	connect(payload: payload, method: :patch, endpoint: "conversations/#{id}")
     end
 
     def prioritize_conversation(priority: "priority", teammate_id:, id:)
@@ -92,7 +92,7 @@ module Gist
     		teammate_id: teammate_id,
     		priority: priority
     	}
-    	connect(payload: payload.to_json, method: :patch, endpoint: "conversations/#{id}/priority")
+    	connect(payload: payload, method: :patch, endpoint: "conversations/#{id}/priority")
     end
 
     def list_conversations(order: "desc", status: "all", sort: "updated_at")
@@ -119,7 +119,7 @@ module Gist
 	      },
 	      body: body
     	}
-    	connect(payload: payload.to_json, method: :get, endpoint: "conversations/#{conversation_id}/messages")
+    	connect(payload: payload, method: :get, endpoint: "conversations/#{conversation_id}/messages")
     end
 
     def reply_to_teammate(message_type: "reply", teammate_id: , body:, conversation_id:)
@@ -131,7 +131,7 @@ module Gist
 	      },
 	      body: body
     	}
-    	connect(payload: payload.to_json, method: :get, endpoint: "conversations/#{conversation_id}/messages")
+    	connect(payload: payload, method: :get, endpoint: "conversations/#{conversation_id}/messages")
     end
   end
 end
