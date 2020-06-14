@@ -1,15 +1,13 @@
-# Gist::Ruby::Client
+# Gist::Client
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gist/ruby/client`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+The Gist Ruby client provides a module, Gist, which can be namespaced with other modules to interact with the Gist API.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'gist-ruby-client'
+gem 'gist-ruby'
 ```
 
 And then execute:
@@ -18,11 +16,17 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install gist-ruby-client
+    $ gem install gist-ruby
 
 ## Usage
 
-TODO: Write usage instructions here
+The library needs to be configured with your account's access token which is available in your Gist Account. Set Gist::Client.access_token to its value:
+
+```ruby
+require "gist-ruby"
+Gist::Client.access_token = "sjblah_..."
+```
+See [examples](/examples) for specific methods
 
 ## Development
 
